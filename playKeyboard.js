@@ -325,13 +325,6 @@ function playKeyboard() {
 
 	    localStorage.setItem("song", song);
 
-	    $(".note").click(function() {
-	    	console.log('yessir');
-            let id = $(this).attr("id");
-            let time = verovioToolkit.getTimeForElement(id);
-            $("#player").midiPlayer.seek(time);
-        });
-
 	    return notesSVG;
 	}
 
