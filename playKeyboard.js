@@ -1,7 +1,7 @@
+var verovioToolkit = new verovio.toolkit();
 
 function playKeyboard() {
 	
-	var verovioToolkit = new verovio.toolkit();
 	let data = [];	
 	// Checking if MIDI input would work
 	window.addEventListener('load', function() {   
