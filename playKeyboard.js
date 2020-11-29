@@ -300,12 +300,27 @@ function playKeyboard() {
     });
     
     function findLastMeasure(data) {
-        for (let i = data.length - 1; i > 0; i--) {
-            if (data[i][data[i].length - 1] === '/') {
-                return data.slice(i + 1);
+        if (data.toString().split('/').length === 1) {
+            return data;
+        } else {
+            for (let i = data.length - 1; i > 0; i--) {
+                if (data[i][data[i].length - 1] === '/') {
+                    return data.slice(i + 1);
+                }
             }
         }
-        return data;
+    }
+
+    function isPreviousPitchinBarSharp(pitch, lastMeasure) {
+        for (let i = lastMeasure.length - 1; i >= 0; i--) {
+            if (lastMeasure[i].slice(-2) === pitch && lastMeasure[i].slice(-4, -3) === 'n') {
+                return false;
+            }
+            if (lastMeasure[i].slice(-2) === pitch && lastMeasure[i].slice(-4, -3) === 'x') {
+                return true;
+            }
+        }
+        return false;
     }
 
 	// To render the notes recorded
@@ -383,16 +398,22 @@ function playKeyboard() {
             }
         }
 
+        let lastMeasure = findLastMeasure(data);
+
         if (note.length > 1) {
             data.push(chordInput + nicks + 'x' + noteDuration + octave + note[0]);
         } else {
-            data.push(chordInput + nicks + noteDuration + octave + note);
+            if (isPreviousPitchinBarSharp(octave+note[0], lastMeasure)) {
+                data.push(chordInput + nicks + 'n' + noteDuration + octave + note);
+            } else {
+                data.push(chordInput + nicks + noteDuration + octave + note);
+            }
         }
 
 		// TODO: add time options (current only common time)
-		
-		let lastMeasure = findLastMeasure(data.slice(0, -1));
-		
+
+		lastMeasure = findLastMeasure(data.slice(0, -1));
+
 		let duration = (1.0 / parseInt(noteDuration));
         if (chordInputMode) {
             duration = 0;
