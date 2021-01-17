@@ -1,11 +1,14 @@
 # Piano-Scribe
-Interactive online piano player with live transcription and midi playback. 
+Interactive online piano player with live transcription and midi playback.
 Input is possible through midi input on Chrome, or computer keyboard and/or mouse on all browsers.
 
 Play around with the latest version of it here https://ivan-v.github.io/Piano-Scribe/ ,
 or see it as part of Virtual Bard: https://www.virtualbard.com/piano_scribe
 
 ![](screencapture.gif)
+
+## Motivation
+There's a clear gap of a browser-based input-to-sheet-music editor. This is my approach at making a simple in-browser keyboard which also transcribes the notes played. 
 
 ## Libraries Used
 - Keith Horwood's audiosynth for live playback:
